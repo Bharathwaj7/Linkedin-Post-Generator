@@ -1,0 +1,59 @@
+Project Overview
+Goal: To build an application that generates LinkedIn posts for influencers, mimicking their unique writing style. It specifically aims to help influencers like Muskan, who covers topics such as mental health and job searches.   
+Technology Stack: Utilizes Llama 3.2, Langchain framework, Streamlit (for the UI), and Gro (for fast LLM inference).   
+Key Objectives:
+Extract topics from an influencer's past posts.   
+Develop a Streamlit UI for users to select topics, language, and post length.   
+Use an LLM to generate posts aligned with the influencer's style.   
+Technical Architecture
+The project follows a two-stage process:   
+
+Preprocessing: Gathering and enriching post data.
+Post Generation: Creating new posts based on user input and processed data.
+Stage 1: Preprocessing
+Data Collection: Involves collecting the influencer's past posts. Currently manual, but automated methods exist. Bright Data is mentioned as a sponsor providing datasets and web scraping tools.   
+Data Storage: Posts are stored in a structured format, using a JSON file in this project. Alternatives like databases or CSV files are possible. The JSON includes fields for post text and engagement metrics.   
+Data Enrichment: An LLM (Llama 3.2) is used to extract metadata like tags/topics, language, and length from each post, adding these fields to the JSON data.   
+Stage 2: Post Generation
+Data Retrieval & Topic Consolidation: Enriched JSON data is retrieved, and a unique, consolidated list of topics is created from the extracted tags.   
+User Interface (Streamlit): A UI built with Streamlit allows users to select:
+Topic (from the unique list).   
+Length (short, medium, long).   
+Language (e.g., English, Hinglish).   
+  
+Prompt Engineering & Generation: A prompt is created based on user selections to guide the LLM. Llama 3.2 generates the post using this prompt and few-shot learning (providing examples) to match the influencer's style.   
+Supporting Tools & Setup
+Bright Data: Provides pre-collected datasets (including LinkedIn) and web scraping tools with proxy networks to avoid blocks.   
+Gro Setup: Gro Cloud is used for fast LLM inference without needing large local models. Setup involves logging in and creating an API key.   
+Development Environment: Involves setting up a project directory, configuring PyCharm, creating data folders (e.g., for raw_post.json), and preparing raw data (manual copy-paste, converting to JSON with specific formatting).   
+Implementation Details
+Data Processing:
+Reading raw JSON data using Python's json library.   
+Extracting metadata using a function (extract_metadata), initially mocked, then integrated with the LLM.   
+Merging metadata with original post data into enriched objects.   
+LLM Integration:
+Setting up API keys using .env files and dotenv.   
+Configuring the LLM with langchain_groq (ChatGroq).   
+Using ChatPromptTemplate and JsonOutputParser for structured LLM interaction during metadata extraction.   
+Unified Tag Generation: Addresses inconsistent tags by using an LLM query to unify them based on examples and rules (e.g., merging "job hunting" into "job search", using title case), outputting a mapping to standardize tags across posts. This uses few-shot learning.   
+UI Building (Few-Shot Post Class & Streamlit):
+A FewShotPost class manages loading data (JSON to Pandas DataFrame via pd.json_normalize), adding a categorized "length" column (short/medium/long based on line count), and extracting unique tags for the UI.   
+A get_filtered_post function filters the DataFrame based on user selections (length, language, tag) like an SQL query.   
+Streamlit is used to create UI elements like titles, columns, dropdowns (st.selectbox), and buttons (st.button).   
+Code is modularized, with generation logic in post_generator.py.   
+Post Generation Logic:
+A get_prompt function constructs the final prompt for the LLM, including user criteria, length-to-lines conversion, language specifications, and relevant few-shot examples retrieved using fs.get_filtered_post.   
+The generate_post function calls get_prompt and then invokes the LLM.   
+Testing involves checking outputs with different inputs and refining few-shot examples if needed.   
+Project Completion & Future Work
+The core coding is complete, but requires further testing and bug fixing.   
+Suggested exercises for enhancement include:
+Adding multi-influencer support via a dropdown.   
+Using a proper database (MySQL, MongoDB) instead of JSON.   
+Dynamically populating topics and languages based on the selected influencer.   
+Adding options for emojis and engaging closing lines.   
+  
+Privacy Concerns
+The document highlights the importance of addressing privacy when using influencer data and giving proper credit. It advises against copying posts without attribution and encourages being a responsible digital citizen.   
+
+Sources and related content
