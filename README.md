@@ -1,8 +1,8 @@
 # 🚀 LinkedIn Post Generator using Lama 3.2, LangChain & Streamlit
 
-A smart LinkedIn Post Generator tool built with ❤️ using Lama 3.2 (Open-Source LLM), LangChain, Streamlit, and Gro for prompt optimization.
+A smart LinkedIn Post Generator tool built using Lama 3.2 (Open-Source LLM), LangChain, Streamlit, and Groq for prompt optimization.
 
-This project helps LinkedIn influencers like *Muskan Honda* (Mental Health & Job Search Creator with 83K+ followers) effortlessly generate posts matching their unique style & voice 🎯.
+This project helps LinkedIn influencers effortlessly generate posts matching their unique style & voice 🎯.
 
 ---
 
@@ -92,11 +92,6 @@ Simple & clean interface with:
 - 🎭 Influencer-style fine-tuning
 - 🕹️ More customization controls
 - 🌐 Multi-platform content generator (Twitter, Instagram)
-
----
-
-## 📸 Demo Preview
-> *Coming Soon...*
 
 ---
 
